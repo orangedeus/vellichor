@@ -1,0 +1,218 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.index-page {
+    min-height: 2000px;
+}
+ 
+.header {
+    padding-top: 45px;
+
+    .nav-dummy {
+        padding: 1rem 5rem 1rem 5rem;
+    
+        position: relative;
+    
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        opacity: 0;
+    }
+}
+
+.nav-bar {
+    padding: 1rem 5rem 1rem 5rem;
+
+    position: relative;
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    z-index: 999;
+}
+
+.sticky {
+    position: fixed;
+    width: calc(100% - 10rem);
+    top: 0;
+    left: 0;
+
+    background-color: white;
+    box-shadow: 0 0 1px hsla(218, 50%, 10%, 0.1), 0 4px 11px hsla(218, 50%, 10%, 0.1);
+    -webkit-box-shadow: 0 0 1px hsla(218, 50%, 10%, 0.1), 0 4px 11px hsla(218, 50%, 10%, 0.1);
+}
+
+
+.nav-bar-column {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+.logo {
+    display: flex;
+    align-items: flex-start;
+    
+    text-decoration: none;
+}
+
+.logo-img {
+    width: 40px;
+    height: auto;
+}
+
+.logo-text {
+    color: black;
+
+    font-size: 40px;
+    font-weight: bold;
+    font-family: "Jua";
+}
+
+.nav-button {
+    border: none;
+    background-color: transparent;
+
+    font-family: "Public Sans", sans-serif;
+    font-size: 18px;
+    margin: 0 1rem 0 1rem;
+
+    cursor: pointer;
+}
+
+.dropdown-button-container {
+    position: relative;
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: white;
+        top: 140%;
+        width: 200%;
+
+        border-radius: 0.5rem;
+
+        padding: 1rem;
+
+        box-shadow: 0 0 0 1px hsla(218, 50%, 10%, 0.1), 0 4px 11px hsla(218, 50%, 10%, 0.1), 0px -5px 35px -20px rgba(0,0,0,0.75);
+        -webkit-box-shadow: 0 0 0 1px hsla(218, 50%, 10%, 0.1), 0 4px 11px hsla(218, 50%, 10%, 0.1), 0px -5px 35px -20px rgba(0,0,0,0.75);
+        z-index: 10;
+
+        left: 0;
+
+        .dropdown-pointer {
+            border: solid 0.5rem transparent;
+            border-bottom: solid 0.5rem white;
+
+            width: 0;
+            height: 0;
+
+            position: relative;
+            top: -32px;
+            left: 13.5%;
+        }
+    }
+}
+
+.nav-button:hover~.dropdown-content {
+    display: block;
+}
+
+.dropdown-button-container:hover {
+    .dropdown-content {
+        display: block;
+        cursor: pointer;
+    }
+}
+
+
+
+.button1 {
+    color: rgba(71, 126, 232, 0.7);
+    border: solid 2px rgba(71, 126, 232, 0.7);
+    border-radius: 500px;
+
+    padding: 0.5rem 2rem 0.5rem 2rem;
+
+    font-family: 'Public Sans', sans-serif;
+    font-size: 1rem;
+    font-weight: bold;
+
+    background-color: transparent;
+    cursor: pointer;
+
+    transition: all 0.4s cubic-bezier(0.42, 0, 0.58, 1);
+
+    position: relative;
+    overflow:hidden;
+}
+
+.button1:hover {
+    background-color: transparent;
+    color: white;
+}
+
+.button1:hover:before {
+    left: 0%;
+    width: 100%;
+    right: auto;
+}
+
+.button1:before {
+	display: block;
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	height: 100%;
+	width: 0;
+	z-index: -1;
+	content: '';
+	background: rgba(71, 126, 232, 0.7);
+	transition: all 0.4s cubic-bezier(0.42, 0, 0.58, 1);
+}
+
+.landing-banner {
+    padding: 0 5rem 0 5rem;
+    display: flex;
+    justify-content: flex-start space-evenly;
+    flex-wrap: wrap;
+}
+
+.landing-section {
+    display: flex;
+    flex-direction: column;
+}
+
+.landing-header {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+    font-size: 50px;
+    font-weight: bold;
+    margin: 2rem 0 2rem 0;
+}
+
+
+.book-feature {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-betweem;
+    align-items: center;
+}
+
+.book-cover {
+    width: 150px;
+    height:220px;
+    background-color: white;
+}
+
+.book-details {
+
+
+
+    color: white;
+}
