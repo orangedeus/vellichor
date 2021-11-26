@@ -1,27 +1,5 @@
 .reader {
-
     background-color: #eee;
-}
-
-.reader-header {
-    padding: 0.5rem 5rem 0.5rem 5rem;
-
-    position: fixed;
-    width: calc(100% - 10rem);
-    top: 0;
-    left: 0;
-    
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
-
-    background-color: white;
-
-    box-shadow: 0 0 1px hsla(218, 50%, 10%, 0.1), 0 4px 11px hsla(218, 50%, 10%, 0.1);
-    -webkit-box-shadow: 0 0 1px hsla(218, 50%, 10%, 0.1), 0 4px 11px hsla(218, 50%, 10%, 0.1);
-
-    z-index: 99999;
 }
 
 .reader-header-column {
@@ -47,11 +25,9 @@
     flex-flow: column wrap;
     align-content: flex-start;
 
-    font-size: 18px;
+    font-size: 19px;
 
     z-index: 0;
-
-    text-align: justify;
 
     transition: 0.3s ease-in-out;
 }
@@ -61,7 +37,10 @@
     width: 800px;
     height: 600px;
 
-    margin: 5rem 5rem 2rem 5rem;
+    margin: 5rem 5rem 0 5rem;
+
+    padding-top: 1rem;
+    padding-bottom: 1rem;
 
     overflow: hidden;
 }
@@ -70,10 +49,103 @@
     margin: 0;
     padding: 0;
 
-    text-align: justify;
+    text-align: left;
 
     margin-top: 0.5rem;
     margin-bottom: 0.5rem;
-    margin-left: 1.5rem;
-    margin-right: 1.5rem;
+    margin-left: 5rem;
+    margin-right: 5rem;
+}
+
+.reader-navigator {
+    position: fixed;
+
+    bottom: 0;
+    left: 0;
+
+    width: calc(100% - 2rem);
+    min-height: 3rem;
+
+    border-radius: 10px;
+    background-color: white;
+
+    margin: 1rem;
+
+    cursor: pointer;
+    border: solid 1px #ccc;
+
+    transition: 0.2s ease;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 0;
+}
+
+.reader-scroll {
+    width: 60%;
+}
+
+.reader-nav-arrow {
+    border: solid 0.5rem transparent;
+    border-bottom: solid 1rem #003333;
+
+    margin-left: 1rem;
+    margin-right: 1rem;
+
+    width: 0;
+    height: 0;
+}
+
+.left {
+    transform: rotate(-90deg);
+}
+
+.right {
+    transform: rotate(90deg);
+}
+
+.reader-scrollbar {
+    position: relative;
+    z-index: 1;
+    background-color: #ccc;
+    border-radius: 200px;
+    width: 30%;
+    min-height: 10px;
+
+    display: flex;
+    align-items: center;
+}
+
+.reader-thumb {
+    height: 23px;
+    width: 23px;
+    max-height: 23px;
+    max-width: 23px;
+    background-color: #777;
+    border-radius: 200px;
+
+    padding: 3px;
+
+    z-index: 2;
+    position: absolute;
+    opacity: 1;
+
+    color:white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 15px;
+    font-family: "Public Sans", sans-serif;
+}
+
+.reader-jump {
+    position: relative;
+}
+
+@media (max-width: 800px) {
+    .reader-paragraph {
+        margin: 0.5rem 2rem 0.5rem 2rem;
+    }
 }

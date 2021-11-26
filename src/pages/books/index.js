@@ -5,7 +5,7 @@ import { data } from "/src/data";
 
 const Books = () => {
     return(
-        <>
+        <>  
             <Reader book={data.books[0]} />
         </>
     )
