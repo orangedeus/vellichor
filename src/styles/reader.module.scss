@@ -13,6 +13,7 @@
 
     display: flex;
     justify-content: center;
+    align-items: center;
 }
 
 .reader-page {
@@ -144,14 +145,32 @@
     position: relative;
 }
 
-@media (max-width: 800px) {
+@media (max-height: 800px) {
+
     .reader-paragraph {
-        margin: 0.5rem 1rem 0.5rem 1rem;
+        margin-left: 1rem;
+        margin-right: 1rem;
     }
 
     .reader-nav-arrow {
         border-bottom: solid 1rem #003333;
         margin-left: 2rem;
         margin-right: 2rem;
+    }
+
+    .reader-content {
+        width: 100vw;
+        height: 100vh;
+    }
+
+    .reader-page-container {
+        margin: 0;
+        padding: 0;
+        margin-top: 6rem;
+        height: calc(100vh - 6rem);
+    }
+
+    .reader-navigator {
+        width: 90vw;
     }
 }

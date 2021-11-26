@@ -93,7 +93,7 @@ const ReadBook = () => {
                     </Link>
                 </div>
                 <div id="book-details" className="reader-header-column" >
-                    {router.query.book_id ? data.books[router.query.book_id].title : "Loading Book"} - Page: {router.query.page == 0 || router.query.page == undefined ? (parseInt(0) + parseInt(1)) : (parseInt(router.query.page) + parseInt(1))} / {pages + 1}
+                    {router.query.book_id ? data.books[router.query.book_id].title : "Loading Book"} {width == null || width < 800 ? "" : `- Page: ${router.query.page == 0 || router.query.page == undefined ? (parseInt(0) + parseInt(1)) : (parseInt(router.query.page) + parseInt(1))} / ${pages + 1}`}
                 </div>
                 <div id="book-buttons" className="reader-header-column" >
                     <div className="button1">
@@ -114,7 +114,7 @@ const ReadBook = () => {
                                     }}>
                                         Font size
                                     </label>
-                                    <input type="range" id="font-size" value={fontSize} min={width == null || width > 800 ? 19 : 12} max={width == null || width > 800 ? 22 : 17} onChange={handleFontChange} />
+                                    <input type="range" id="font-size" value={fontSize} min={width == null || width > 800 ? 19 : 9} max={width == null || width > 800 ? 22 : 17} onChange={handleFontChange} />
                                 </div>
                                 <div className="menu-settings-section">
                                     <input type="checkbox" id="keep-nav" checked={keepNav} value={keepNav} onChange={handleKNChange} />

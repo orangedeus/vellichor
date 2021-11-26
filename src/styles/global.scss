@@ -319,3 +319,9 @@ body {
         font-size: 15px;
     }
 }
+
+@media (max-height: 800px) {
+    .reader-header {
+        width: calc(100% - 7rem);
+    }
+}

@@ -247,7 +247,7 @@ export default function Reader({ book, id, getPages, fontSize, keepNav }) {
         <div className={styles.reader}>
             <div className={styles["reader-content"]}>
                 <div className={styles["reader-container"]}>
-                    <PageContainer fontSize={fontSize} keepNav={keepNav} width={width == null || width > 800 ? 700 : (width - 100)} book={book} id={id} sendPages={getPages} />
+                    <PageContainer fontSize={fontSize} keepNav={keepNav} width={width == null || width > 800 ? 700 : width - 50} book={book} id={id} sendPages={getPages} />
                 </div>
             </div>
         </div>
