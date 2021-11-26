@@ -146,6 +146,10 @@
 
 @media (max-width: 800px) {
     .reader-paragraph {
-        margin: 0.5rem 2rem 0.5rem 2rem;
+        margin: 0.5rem 1rem 0.5rem 1rem;
+    }
+
+    .reader-nav-arrow {
+        border-bottom: solid 2rem #003333;
     }
 }

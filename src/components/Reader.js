@@ -225,7 +225,8 @@ const PageContainer = ({ book, width, sendPages, id, fontSize, keepNav }) => {
         <>
             <div draggable={true} ref={pageContainerRef} style={{
                 width: `${width}px`,
-            }} onMouseDown={handleDragStart} onMouseMove={handleDragMove} onMouseUp={handleDragEnd} id="page-container" className={styles["reader-page-container"]}>
+            }} onMouseDown={handleDragStart} onMouseMove={handleDragMove} onMouseUp={handleDragEnd}
+            onTouchStart={handleDragStart} onTouchMove={handleDragMove} onTouchEnd={handleDragEnd} id="page-container" className={styles["reader-page-container"]}>
                 <Page fontSize={fontSize} book={book} id={id} pageRef={pageRef} dragStart={dragStart} calculation={calculation} />
             </div>
             <div className={styles["reader-navigator"]} onMouseEnter={handleHover} onMouseLeave={handleHover} style={{ opacity: (keepNav ? true : showNavigator) ? 1 : 0 }}>
@@ -246,7 +247,7 @@ export default function Reader({ book, id, getPages, fontSize, keepNav }) {
         <div className={styles.reader}>
             <div className={styles["reader-content"]}>
                 <div className={styles["reader-container"]}>
-                    <PageContainer fontSize={fontSize} keepNav={keepNav} width={width == null || width > 800 ? 700 : (width - 50)} book={book} id={id} sendPages={getPages} />
+                    <PageContainer fontSize={fontSize} keepNav={keepNav} width={width == null || width > 800 ? 700 : (width - 100)} book={book} id={id} sendPages={getPages} />
                 </div>
             </div>
         </div>
