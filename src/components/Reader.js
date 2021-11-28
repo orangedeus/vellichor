@@ -2,31 +2,9 @@ import React, { useState, useEffect, useRef } from "react";
 
 import { useRouter } from "next/router";
 
-import Link from "next/link";
-
-import { data } from "../data";
-import { GetStaticProps } from "next";
-
 import styles from "/src/styles/reader.module.scss";
 
-const useWindowDimensions = () => {
-    const [windowDimensions, setWindowDimensions] = useState({ width: null, height: null });
-
-    useEffect(() => {
-        setWindowDimensions({ width: window.innerWidth, height: window.innerHeight });
-        const handleResize = () => {
-            setWindowDimensions({ width: window.innerWidth, height: window.innerHeight });
-        }
-
-        window.addEventListener('resize', handleResize);
-
-        return (() => {
-            window.removeEventListener('resize', handleResize);
-        });
-    }, [])
-
-    return windowDimensions;
-}
+import useWindowDimensions from "/src/windowDimensions";
 
 const Page = ({ book, pageRef, calculation, dragStart, fontSize }) => {
 
@@ -69,10 +47,12 @@ const PageContainer = ({ book, width, sendPages, id, fontSize, keepNav }) => {
             setPages(Math.floor(pageRef.current.scrollWidth / width));
         }, 500)
         snapToPage();
+        styleRange();
     }, [fontSize]);
 
     useEffect(() => {
         snapToPage();
+        styleRange();
     }, [width])
 
     useEffect(() => {
@@ -82,6 +62,7 @@ const PageContainer = ({ book, width, sendPages, id, fontSize, keepNav }) => {
         let containerRef = pageContainerRef.current;
 
         containerRef.addEventListener('wheel', handleWheel, {passive: false});
+        containerRef.addEventListener('touchstart', handleDragStart, {passive : false});
 
         return(() => {
             containerRef.removeEventListener('wheel', handleWheel)
@@ -90,8 +71,13 @@ const PageContainer = ({ book, width, sendPages, id, fontSize, keepNav }) => {
 
     useEffect(() => {
         setPages(Math.floor(pageRef.current.scrollWidth / width));
-        setPage(router.query.page ? parseInt(router.query.page) : page)
+        setPage(router.query.page ? parseInt(router.query.page) - 1 : page)
     }, []);
+
+    useEffect(() => {
+        setPages(Math.floor(pageRef.current.scrollWidth / width));
+        setPage(router.query.page ? parseInt(router.query.page) - 1 : page)
+    }, [router.query.page]);
 
     useEffect(() => {
         if (dragStart == null) {
@@ -108,9 +94,7 @@ const PageContainer = ({ book, width, sendPages, id, fontSize, keepNav }) => {
     }, [pages])
 
     const keepWithinBounds = () => {
-
         if (pages == 0) {
-            console.log("Pages equal to zero ", pages)
             return;
         }
 
@@ -118,12 +102,10 @@ const PageContainer = ({ book, width, sendPages, id, fontSize, keepNav }) => {
             return;
         }
         if (page > pages) {
-            console.log("Setting to pages ", pages);
             setPage(pages);
         }
 
         if (page < 0) {
-            console.log("Setting this to zero")
             setPage(0);
         }
     }
@@ -138,12 +120,13 @@ const PageContainer = ({ book, width, sendPages, id, fontSize, keepNav }) => {
 
     useEffect(() => {
         if (pages != 0) {
-            if (page != router.query.page) {
-                router.push(`/books/read/${id}/?page=${page}`, 0, { shallow: true })
+            if (page + 1 != router.query.page) {
+                router.push(`/books/${id}/read/?page=${parseInt(page) + 1}`, 0, { shallow: true })
             }
         }
         setCalculation(page * width);
         keepWithinBounds();
+        styleRange();
     }, [page])
 
     const snapToPage = () => {
@@ -188,17 +171,22 @@ const PageContainer = ({ book, width, sendPages, id, fontSize, keepNav }) => {
     const handleDragStart = (event) => {
         event.preventDefault();
         let rect = event.currentTarget.getBoundingClientRect();
-        if (event.target != event.currentTarget) {
-            setDragStart(event.clientX - rect.left);
+        if ('touches' in event) {
+            setDragStart(event.touches[0].clientX - rect.left)
         } else {
             setDragStart(event.clientX - rect.left);
         }
+        
     }
 
     const handleDragMove = (event) => {
         let rect = event.currentTarget.getBoundingClientRect();
         if (dragStart != null) {
-            setDragCurrent(event.clientX - rect.left);
+            if ('touches' in event) {
+                setDragCurrent(event.touches[0].clientX - rect.left)
+            } else {
+                setDragCurrent(event.clientX - rect.left);
+            }
         }
     }
 
@@ -221,17 +209,25 @@ const PageContainer = ({ book, width, sendPages, id, fontSize, keepNav }) => {
         setPage(newValue)
     }
 
+    const styleRange = () => {
+        let rangeEl = document.getElementById('scroll-nav');
+        var value = (page / pages) * 100;
+        rangeEl.style.background = `linear-gradient(to right, #003738 0%, #003738 ${value}%, #fff ${value}%, #fff 100%)`
+    }
+
     return (
         <>
             <div draggable={true} ref={pageContainerRef} style={{
                 width: `${width}px`,
-            }} onMouseDown={handleDragStart} onMouseMove={handleDragMove} onMouseUp={handleDragEnd}
-            onTouchStart={handleDragStart} onTouchMove={handleDragMove} onTouchEnd={handleDragEnd} id="page-container" className={styles["reader-page-container"]}>
+            }} onMouseDown={handleDragStart} onMouseMove={handleDragMove} onMouseUp={handleDragEnd} onMouseOut={handleDragEnd}
+            onTouchMove={handleDragMove} onTouchEnd={handleDragEnd} id="page-container" className={styles["reader-page-container"]}>
                 <Page fontSize={fontSize} book={book} id={id} pageRef={pageRef} dragStart={dragStart} calculation={calculation} />
             </div>
             <div className={styles["reader-navigator"]} onMouseEnter={handleHover} onMouseLeave={handleHover} style={{ opacity: (keepNav ? true : showNavigator) ? 1 : 0 }}>
                 <div className={`${styles["reader-nav-arrow"]} ${styles["left"]}`} onClick={() => { handlePageMove(page - 1) }} />
-                <input id="scroll-nav" onChange={handleScrollChange} className={styles["reader-scroll"]} type="range" value={page} min={0} max={pages} />
+                <input id="scroll-nav" style={{
+                    background: `linear-gradient(to right, #003738 0%, #003738 ${(page / pages) * 100}%, #fff ${(page / pages) * 100}%, #fff 100%)`
+                }} onChange={handleScrollChange} className={styles["reader-scroll"]} type="range" value={page} min={0} max={pages} />
                 <div className={`${styles["reader-nav-arrow"]} ${styles["right"]}`} onClick={() => { handlePageMove(page + 1) }} />
             </div>
         </>
@@ -247,7 +243,7 @@ export default function Reader({ book, id, getPages, fontSize, keepNav }) {
         <div className={styles.reader}>
             <div className={styles["reader-content"]}>
                 <div className={styles["reader-container"]}>
-                    <PageContainer fontSize={fontSize} keepNav={keepNav} width={width == null || width > 800 ? 700 : width - 50} book={book} id={id} sendPages={getPages} />
+                    <PageContainer fontSize={fontSize} keepNav={keepNav} width={width != null && width < 768 ? (width < 544 ? 350 : width - 50) : 700} book={book} id={id} sendPages={getPages} />
                 </div>
             </div>
         </div>

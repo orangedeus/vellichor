@@ -130,7 +130,14 @@ body {
     }
 }
 
+.buttons-container {
+    margin-top: 2rem;
+    height: 30px;
+    width: 100%;
 
+    display: flex;
+    flex-direction: row;
+}
 
 .button1 {
     color: rgba(71, 126, 232, 0.7);
@@ -149,7 +156,7 @@ body {
     transition: all 0.4s cubic-bezier(0.42, 0, 0.58, 1);
 
     position: relative;
-    overflow:hidden;
+    overflow: hidden;
 }
 
 .button1:hover {
@@ -199,22 +206,88 @@ body {
 .book-feature {
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-betweem;
+    justify-content: space-evenly;
     align-items: center;
+    width: 100%;
 }
 
 .book-cover {
-    width: 150px;
+    width: 160px;
     height:220px;
     background-color: white;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
 .book-details {
-
-
-
     color: white;
+    width: 10rem;
+    font-size: 13px;
+}
+
+.books {
+    height: calc(100vh - 127px);
+    min-height: calc(100vh - 127px);
+}
+
+.books-content {
+    padding: 2rem 5rem 0 5rem;
+    background-color: #eee;
+    height: 100%;
+}
+
+.book-card {
+    box-shadow: 0 0 1px hsla(218, 50%, 10%, 0.1), 0 4px 11px hsla(218, 50%, 10%, 0.1);
+    -webkit-box-shadow: 0 0 1px hsla(218, 50%, 10%, 0.1), 0 4px 11px hsla(218, 50%, 10%, 0.1);
+
+    padding: 20px;
+
+    border-radius: 1rem;
+
+    background-color: white;
+    margin: 1rem;
+    cursor: pointer;
+}
+
+.book-card:hover {
+    box-shadow: 0 0 1px hsla(218, 50%, 10%, 0.1), 0 4px 11px hsla(218, 50%, 10%, 0.5);
+    -webkit-box-shadow: 0 0 1px hsla(218, 50%, 10%, 0.1), 0 4px 11px hsla(218, 50%, 10%, 0.5);
+}
+
+.book-card-title {
+    font-family: "Public Sans", sans-serif;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.book-card-author {
+    font-family: "Public Sans", sans-serif;
+    font-size: 15px;
+}
+
+.search-box {
+    font-size: 20px;
+    padding: 0.5rem;
+    padding-left: 50px;
+    border-radius: 20px;
+    width: 400px;
+
+    background-image: url("/assets/search.png");
+    background-repeat: no-repeat;
+    background-position: 1rem center;
+    background-size: 20px;
+}
+
+.book-page-content {
+    background-color: #eee;
+    min-height: calc(100vh - 127px);
+
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
 }
 
 .reader-header {
@@ -310,7 +383,7 @@ body {
     /* background-color: hsla(218, 50%, 10%, 0.1); */
 }
 
-@media (max-width: 800px) {
+@media (max-width: 768px) {
     #book-buttons {
         display: none;
     }
@@ -319,3 +392,39 @@ body {
         font-size: 15px;
     }
 }
+
+#scroll-nav {
+    background: linear-gradient(to right, #003738 0%, #003738 0%, #fff 0%, #fff 100%);
+    border: solid 1px #003738;
+    border-radius: 8px;
+    height: 7px;
+    width: 60%;
+    outline: none;
+    transition: background 450ms ease-in;
+    -webkit-appearance: none;
+}
+
+input[type=range]::-webkit-slider-thumb {
+    height: 15px;
+    width: 15px;
+    border-radius: 15px;
+    background: #003738;
+    cursor: pointer;
+    -webkit-appearance: none;
+}
+
+input[type=range]::-moz-range-thumb {
+    height: 15px;
+    width: 15px;
+    border-radius: 15px;
+    background: #003738;
+    cursor: pointer;
+  }
+
+  input[type=range]::-ms-thumb {
+    height: 15px;
+    width: 15px;
+    border-radius: 15px;
+    background: #003738;
+    cursor: pointer;
+  }

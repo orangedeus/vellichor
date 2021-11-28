@@ -2,6 +2,8 @@ import React from "react";
 import Head from "next/head";
 import Header from "../components/Header";
 import Carousel from "../components/Carousel";
+import { data } from "../data";
+import router from "next/router";
 
 const Index = (props) => {
 
@@ -25,23 +27,19 @@ const Index = (props) => {
                         <div className="landing-header">
                             Featured.
                         </div>
-                        <Carousel>
-                            <div className="book-feature">
+                        <Carousel duration={5}>
+                        {data.books.map((book, i) => (
+                            <div key={`book-feature-${i}`} onClick={() => {
+                                router.push(`/books/${i}`);
+                            }} className="book-feature">
                                 <div className="book-cover">
-                                    test
+                                    <b>{book.title}</b> <br /> {book.author}
                                 </div>
                                 <div className="book-details">
-                                    rwar
+                                    <span style={{ fontSize: "18px" }}>{book.title}</span> <br /> {book.synopsis}
                                 </div>
                             </div>
-                            <div className="book-feature">
-                                <div className="book-cover">
-                                    test
-                                </div>
-                                <div className="book-details">
-                                    rwar
-                                </div>
-                            </div>
+                        ))}
                         </Carousel>
                     </div>
                 </div>
