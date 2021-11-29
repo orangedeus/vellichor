@@ -20,7 +20,7 @@ const BookPage =  ({ book }) => {
                     <div className="book-cover" style={{
                         transform: "scale(200%)"
                     }}>
-                        <b>{book.title}</b> <br /> {book.author}
+                        <b>{book.title}</b> <br /> <span style={{fontSize: "12px"}}>{book.author}</span>
                     </div>
                     <div className="book-feature" style={{
                         transform: "scale(160%)",
@@ -28,7 +28,9 @@ const BookPage =  ({ book }) => {
                         width: "20%",
                         display: "flex",
                         flexDirection: "column",
-                        alignItems: "flex-start"
+                        alignItems: "flex-start",
+                        minWidth: "200px",
+                        marginLeft: "1rem"
                     }}>
                         <span style={{ fontSize: "18px", fontFamily: "'Public Sans', sans-serif", fontWeight: "bold" }}>{book.title}</span> <br /> <span style={{fontFamily: "'Public Sans', sans-serif"}}>{book.synopsis}</span>
                         <div className="buttons-container" style={{ width: "300px" }}>

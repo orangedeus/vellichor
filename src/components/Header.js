@@ -13,6 +13,10 @@ export default function Header() {
         function handleScroll(_event) {
             let navBar = document.getElementsByClassName('nav-bar')[0];
 
+            if (!navBar) {
+                return;
+            }
+
             if (window.scrollY > navBar.offsetTop) {
                 setNavBarClass("nav-bar sticky");
             } else {
@@ -31,8 +35,6 @@ export default function Header() {
     return(
         <>
             <Head>
-                <title>Browse books at Vellichor</title>
-                <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
                 <link rel="preconnect" href="https://fonts.googleapis.com" />
                 <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
                 <link href="https://fonts.googleapis.com/css2?family=Jua&family=Public+Sans&display=swap" rel="stylesheet"></link>
