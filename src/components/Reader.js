@@ -43,16 +43,11 @@ const PageContainer = ({ book, width, sendPages, id, fontSize, keepNav }) => {
     const pageContainerRef = useRef()
 
     useEffect(() => {
-        setTimeout(() => {
-            setPages(Math.floor(pageRef.current.scrollWidth / width));
-        }, 500)
         snapToPage();
-        styleRange();
     }, [fontSize]);
 
     useEffect(() => {
         snapToPage();
-        styleRange();
     }, [width])
 
     useEffect(() => {
@@ -65,7 +60,8 @@ const PageContainer = ({ book, width, sendPages, id, fontSize, keepNav }) => {
         containerRef.addEventListener('touchstart', handleDragStart, {passive : false});
 
         return(() => {
-            containerRef.removeEventListener('wheel', handleWheel)
+            containerRef.removeEventListener('wheel', handleWheel);
+            containerRef.removeEventListener('touchstart', handleDragStart, {passive : false});
         })
     });
 
@@ -75,7 +71,6 @@ const PageContainer = ({ book, width, sendPages, id, fontSize, keepNav }) => {
     }, []);
 
     useEffect(() => {
-        setPages(Math.floor(pageRef.current.scrollWidth / width));
         setPage(router.query.page ? parseInt(router.query.page) - 1 : page)
     }, [router.query.page]);
 
@@ -126,7 +121,6 @@ const PageContainer = ({ book, width, sendPages, id, fontSize, keepNav }) => {
         }
         setCalculation(page * width);
         keepWithinBounds();
-        styleRange();
     }, [page])
 
     const snapToPage = () => {
@@ -207,12 +201,6 @@ const PageContainer = ({ book, width, sendPages, id, fontSize, keepNav }) => {
             return;
         }
         setPage(newValue)
-    }
-
-    const styleRange = () => {
-        let rangeEl = document.getElementById('scroll-nav');
-        var value = (page / pages) * 100;
-        rangeEl.style.background = `linear-gradient(to right, #003738 0%, #003738 ${value}%, #fff ${value}%, #fff 100%)`
     }
 
     return (
