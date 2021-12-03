@@ -412,26 +412,29 @@ body {
     -webkit-appearance: none;
 }
 
-input[type=range]::-webkit-slider-thumb {
+#scroll-nav::-webkit-slider-thumb {
     height: 15px;
     width: 15px;
+    border: none;
     border-radius: 15px;
     background: #003738;
     cursor: pointer;
     -webkit-appearance: none;
 }
 
-input[type=range]::-moz-range-thumb {
+#scroll-nav::-moz-range-thumb {
     height: 15px;
     width: 15px;
+    border: none;
     border-radius: 15px;
     background: #003738;
     cursor: pointer;
   }
 
-  input[type=range]::-ms-thumb {
+  #scroll-nav::-ms-thumb {
     height: 15px;
     width: 15px;
+    border: none;
     border-radius: 15px;
     background: #003738;
     cursor: pointer;
